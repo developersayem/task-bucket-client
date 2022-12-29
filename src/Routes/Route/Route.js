@@ -2,7 +2,9 @@ import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../../Layouts/Main/Main';
 import AddTask from '../../Pages/AddTask/AddTask';
-import Form from '../../Pages/AddTask/Form/Form';
+import LogIn from '../../Pages/LogIn/LogIn';
+import MyTask from '../../Pages/MyTask/MyTask';
+import Register from '../../Pages/Register/Register';
 
 
 
@@ -18,8 +20,20 @@ export const router = createBrowserRouter([
                 element: <AddTask></AddTask>
             },
             {
-                path: '/addtaskform',
-                element: <Form></Form>
+                path: '/mytask',
+                element: <MyTask></MyTask>
+            },
+            {
+                path: '/completedtask',
+                element: <MyTask></MyTask>
+            },
+            {
+                path: '/login',
+                element: <LogIn></LogIn>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             }
         ]
     }

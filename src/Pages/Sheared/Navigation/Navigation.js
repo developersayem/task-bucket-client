@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from "react";
 import {
     Navbar,
@@ -9,6 +9,7 @@ import {
 } from "@material-tailwind/react";
 import Logo from '../../../Assets/Img/logo.png'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/UserContext';
 
 const Navigation = () => {
     const [openNav, setOpenNav] = useState(false);
@@ -20,15 +21,18 @@ const Navigation = () => {
         );
     }, []);
 
+    const { user, LogOut } = useContext(AuthContext);
+
+
     const navList = (
         <ul className="mb-4 mt-2   flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <Link to="/addtask" className="text-sm flex items-center hover:text-[#FF1E56] font-semibold">
                 Add Task
             </Link>
-            <Link to="/" className="text-sm flex items-center hover:text-[#FF1E56] font-semibold">
+            <Link to="/mytask" className="text-sm flex items-center hover:text-[#FF1E56] font-semibold">
                 My Tasks
             </Link>
-            <Link to="#" className="text-sm flex items-center hover:text-[#FF1E56] font-semibold">
+            <Link to="/completedtask" className="text-sm flex items-center hover:text-[#FF1E56] font-semibold">
                 Completed Task
             </Link>
         </ul>
@@ -48,9 +52,33 @@ const Navigation = () => {
                     </div>
                 </Typography>
                 <div className="hidden lg:block">{navList}</div>
-                <Button variant="gradient" color='pink' size="sm" className="hidden lg:inline-block">
-                    <span>Buy Now</span>
-                </Button>
+                {!user ?
+                    <div>
+                        <Link to='/login' className='mr-5'>
+                            <Button variant="gradient" color='pink' size="sm" className="hidden lg:inline-block">
+                                <span>Login</span>
+                            </Button>
+                        </Link>
+                        <Link to='/register'>
+                            <Button variant="gradient" color='pink' size="sm" className="hidden lg:inline-block">
+                                <span>Register</span>
+                            </Button>
+                        </Link>
+                    </div> : <></>
+                }
+                {user ?
+                    <div>
+                        <h1 className='hidden lg:inline-block mr-5'>
+                            {user ? user.displayName : 'Anonymous'}
+                        </h1>
+                        <Button
+                            onClick={LogOut}
+                            variant="gradient" color='pink' size="sm" className="hidden lg:inline-block">
+                            <span>Log Out</span>
+                        </Button>
+                    </div> : <></>
+
+                }
                 <IconButton
                     variant="text"
                     className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
@@ -91,9 +119,36 @@ const Navigation = () => {
             </div>
             <MobileNav open={openNav}>
                 {navList}
-                <Button variant='gradient' size="sm" fullWidth className="mb-2 bg-[#FF1E56]">
-                    <span>Register</span>
-                </Button>
+                <div className='my-5'>
+
+                    {!user ?
+                        <div>
+                            <Link to='/login' className='mr-5'>
+                                <Button variant="gradient" fullWidth color='pink' size="sm" className="">
+                                    <span>Login</span>
+                                </Button>
+                            </Link>
+                            <Link to='/register'>
+                                <Button variant="gradient" fullWidth color='pink' size="sm" className="">
+                                    <span>Register</span>
+                                </Button>
+                            </Link>
+                        </div> : <></>
+                    }
+                    {user ?
+                        <div>
+                            <h1 className=' mb-5'>
+                                {user ? user.displayName : 'Anonymous'}
+                            </h1>
+                            <Button
+                                onClick={LogOut}
+                                variant="gradient" fullWidth color='pink' size="sm" className="">
+                                <span>Log Out</span>
+                            </Button>
+                        </div> : <></>
+
+                    }
+                </div>
             </MobileNav>
         </Navbar>
     );
