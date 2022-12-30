@@ -1,23 +1,19 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/UserContext';
-import TaskCard from './TaskCard/TaskCard';
+import TaskCard from '../MyTask/TaskCard/TaskCard';
 
-const MyTask = () => {
+const Home = () => {
     const [tasks, setTasks] = useState([]);
-    const [selectedId, setSelectedId] = useState(null)
-
 
     const { user } = useContext(AuthContext);
+
     useEffect(() => {
-        fetch(`https://task-bucket-server.vercel.app/mytasks?email=${user?.email}`)
+        fetch(`https://task-bucket-server.vercel.app/taskType`)
             .then(res => res.json())
             .then(data => setTasks(data))
             .catch(err => console.error(err))
     }, [])
 
-
-    console.log(tasks)
     return (
         <div>
             <div className='grid grid-cols-1 gap-10 mx-16 mt-24'>
@@ -33,4 +29,4 @@ const MyTask = () => {
 
 };
 
-export default MyTask;
+export default Home;

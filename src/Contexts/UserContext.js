@@ -53,6 +53,7 @@ const UserContext = ({ children }) => {
     });
   };
 
+
   const authInfo = {
     user,
     creteUser,

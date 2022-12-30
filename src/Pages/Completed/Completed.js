@@ -1,16 +1,13 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/UserContext';
-import TaskCard from './TaskCard/TaskCard';
+import TaskCard from '../MyTask/TaskCard/TaskCard';
 
-const MyTask = () => {
+const Completed = () => {
     const [tasks, setTasks] = useState([]);
-    const [selectedId, setSelectedId] = useState(null)
 
 
-    const { user } = useContext(AuthContext);
     useEffect(() => {
-        fetch(`https://task-bucket-server.vercel.app/mytasks?email=${user?.email}`)
+        fetch(`https://task-bucket-server.vercel.app/completed`)
             .then(res => res.json())
             .then(data => setTasks(data))
             .catch(err => console.error(err))
@@ -33,4 +30,4 @@ const MyTask = () => {
 
 };
 
-export default MyTask;
+export default Completed;

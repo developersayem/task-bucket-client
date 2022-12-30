@@ -7,7 +7,6 @@ import {
     Button,
     IconButton,
 } from "@material-tailwind/react";
-import Logo from '../../../Assets/Img/logo.png'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/UserContext';
 

@@ -30,8 +30,8 @@ const AddTask = () => {
     }
 
     const { user } = useContext(AuthContext)
-    const email = user.email;
-    const userName = user.displayName;
+    const email = user?.email || null;
+    const userName = user?.displayName || null;
 
     const handleAddTask = (e) => {
         e.preventDefault();
@@ -148,11 +148,12 @@ const AddTask = () => {
                         </select> */}
 
                         </div>
-                        <div className="mt-4 sm:flex sm:items-center sm:-mx-2 flex justify-center">
-                            <Button type='submit' variant='gradient' color='pink'>
-                                Add Task
-                            </Button>
-                        </div>
+                        {selected ?
+                            <div className="mt-4 sm:flex sm:items-center sm:-mx-2 flex justify-center">
+                                <Button type='submit' variant='gradient' color='pink'>
+                                    Add Task
+                                </Button>
+                            </div> : <></>}
                     </form>
                 </motion.div >
             </div>

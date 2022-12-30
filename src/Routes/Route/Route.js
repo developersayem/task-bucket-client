@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../../Layouts/Main/Main';
 import AddTask from '../../Pages/AddTask/AddTask';
+import Home from '../../Pages/Home/Home';
 import LogIn from '../../Pages/LogIn/LogIn';
 import MyTask from '../../Pages/MyTask/MyTask';
 import Register from '../../Pages/Register/Register';
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
         path: "/",
         element: <Main></Main>,
         children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            },
             {
                 path: '/addtask',
                 element: <AddTask></AddTask>
